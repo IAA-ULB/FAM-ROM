@@ -237,7 +237,7 @@ def evaluate_PG_SVD_numba(targets, snapshot_omegas_orig, snapshot_matrices_orig,
     Nr = U.shape[1]
     n_targets = len(targets)
 
-    F= F.ravel()
+    F = F.ravel()
     X = np.ascontiguousarray(snapshot_matrices_orig[:, 0, :])
     Y = np.ascontiguousarray(snapshot_matrices_orig[:, 1, :])
 
