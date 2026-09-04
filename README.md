@@ -1,11 +1,10 @@
-#### This repository is still under development
-
 This repository can be used to create an emulator for QRPA linear response. The emulator applies reduced order modelling to approximate from previous FAM amplitudes. 
+Related DOI: TBA
 
 ---
  The repository is structured as follows:
 ```text
-ROM/
+FAM-ROM/
 ├── docs/
 ├── src/
 │   ├── __init__.py
@@ -25,10 +24,10 @@ The user is expected to provide the FAM outputs and a parser to extract the foll
 
 After initialisation of the basis using
 ```python
-from ROM.ROM_basis import ROM_basis
+from src.ROM_basis import ROM_basis
 import parser # user-defined parser
 basis = ROM_basis()
-omegas, matrices, F = parser()
+omegas, matrices, F = parser.parse(data)
 basis.load(omegas=omegas, snapshots=matrices, F=F)
 ```
 the repository can be used for the following tasks:
@@ -44,8 +43,11 @@ basis.evaluate(targets)
 
 ## Installation
 ```bash
-pip install git+https://github.com/xEmmaV99/ROM.git
-pip install -r requirements.txt
+git clone https://github.com/IAA-ULB/FAM-ROM.git
+cd ./FAM-ROM/
+python3 -m venv .venv
+source .venv/bin/activate 
+python3 -m pip install -r requirements.txt
 ```
 ## Documentation
 The documentation can be opened by running the following command in the root directory of the repository:
