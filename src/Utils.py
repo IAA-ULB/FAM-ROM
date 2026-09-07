@@ -103,7 +103,7 @@ def evaluate_G_numba(targets, snapshot_omegas, snapshot_matrix, F):
             dot_val = 0.0 + 0.0j
             for k in range(n_snaps):
                 dot_val += C_vals[w,k] * overlap_weights[k]
-            S[w] = -2 * dot_val.imag / np.pi
+            S[w] = -dot_val.imag / np.pi
     return S, C_vals
 
 @njit(inline='always',parallel=True, fastmath=True, cache=True) #DEBUG EMMA
@@ -159,7 +159,7 @@ def evaluate_PG_numba(targets, snapshot_omegas, snapshot_matrix, F):
         for k in range(n_snaps):
             dot_val += C[k] * overlap_weights[k]
 
-        S[w] = -2 * dot_val.imag / np.pi
+        S[w] = -dot_val.imag / np.pi
 
     return S, C_vals
 
@@ -210,7 +210,7 @@ def evaluate_G_SVD_numba(targets, snapshot_ML, transformed_snapshots, U, F):
         C = np.linalg.solve(A, b)
         C_SVD[w] = C
         dot_val = np.dot(C, overlap_weights)
-        S[w] = -2 * dot_val.imag / np.pi
+        S[w] = -dot_val.imag / np.pi
 
     return S, C_SVD
 
@@ -309,6 +309,6 @@ def evaluate_PG_SVD_numba(targets, snapshot_omegas_orig, snapshot_matrices_orig,
         C_SVD[w, :] = c
 
         dot_val = np.dot(c, overlap_weights)
-        S[w] = -2.0 * dot_val.imag / np.pi
+        S[w] = -dot_val.imag / np.pi
 
     return S, C_SVD
